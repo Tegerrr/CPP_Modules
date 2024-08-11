@@ -7,7 +7,7 @@ class Form
 {
 	private:
 		std::string const _name;
-		bool _signature;
+		bool _signed;
 		int const _grade_sign;
 		int const _grade_exe;
 
@@ -24,6 +24,7 @@ class Form
 		bool				&getSignature() const;
 		void				incrementGrade();
 		void				decrementGrade();
+		void				beSigned(Bureaucrat const &to_sign);
 
 		class GradeTooHighException : public std::exception
 		{
