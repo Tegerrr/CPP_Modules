@@ -1,4 +1,4 @@
-NAME     = Bureaucrat
+NAME     = Form
 
 SRCS     = $(wildcard *.cpp)
 HDRS     = $(wildcard *.hpp)

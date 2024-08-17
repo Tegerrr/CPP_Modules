@@ -4,9 +4,12 @@
 #include <string>
 #include <iostream>
 #include <stdexcept>
+#include "Form.hpp"
 
 #define LOWEST 150
 #define HIGHEST 1
+
+class Form;
 
 class Bureaucrat
 {
@@ -25,7 +28,7 @@ class Bureaucrat
 		int const			&getGrade() const;
 		void				incrementGrade();
 		void				decrementGrade();
-		void				signForm();
+		void				signForm(Form &form) const;
 
 		class GradeTooHighException : public std::exception
 		{

@@ -2,40 +2,20 @@
 
 int main()
 {
-	Bureaucrat a;
 
-	std::cout << "a = " << a << std::endl;
+		Form	form("exam", 1, 5);
 	try
 	{
-		Bureaucrat b("bob", 151);
+		Bureaucrat a("Stan", 1);
+		a.signForm(form);
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << '\n';
-	}
-	
-	try
-	{
-		Bureaucrat c("steve", 0);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
+		std::cout << "hi" << std::endl;
 	}
 
-	try
-	{
-		Bureaucrat d;
-		d.decrementGrade();
-		std::cout << "decremented to " << d.getGrade() << std::endl;
-		d.incrementGrade();
-		d.incrementGrade();
-		std::cout << "it's ok" << std::endl;
-	}
-	catch(const std::exception &e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	
+	std::cout << form << std::endl;
+
 	return 0;
 }
