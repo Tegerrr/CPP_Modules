@@ -4,10 +4,11 @@ int main()
 {
 	Bureaucrat a;
 
-	std::cout << "a = " << a << std::endl;
+	std::cout << a << std::endl;
 	try
 	{
 		Bureaucrat b("bob", 151);
+		std::cout << b << std::endl;
 	}
 	catch(const std::exception& e)
 	{
@@ -29,7 +30,9 @@ int main()
 		d.decrementGrade();
 		std::cout << "decremented to " << d.getGrade() << std::endl;
 		d.incrementGrade();
+		std::cout << "incremented to " << d.getGrade() << std::endl;
 		d.incrementGrade();
+		std::cout << "incremented to " << d.getGrade() << std::endl;
 		std::cout << "it's ok" << std::endl;
 	}
 	catch(const std::exception &e)

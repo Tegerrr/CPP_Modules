@@ -2,11 +2,10 @@
 
 int main()
 {
-
-		Form	form("exam", 1, 5);
+	Form	form("exam", 5, 3);
 	try
 	{
-		Bureaucrat a("Stan", 1);
+		Bureaucrat a("Stan", 4);
 		a.signForm(form);
 	}
 	catch(const std::exception& e)
