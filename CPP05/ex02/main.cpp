@@ -8,7 +8,7 @@ int main()
 	srand(time(0));
 	try
 	{
-		Bureaucrat dude("dude", 50);
+		Bureaucrat dude("dude", 1);
 		ShrubberyCreationForm form1("Shrubbery");
 		PresidentialPardonForm form2("Presidential");
 		RobotomyRequestForm form3("Robotomy");
