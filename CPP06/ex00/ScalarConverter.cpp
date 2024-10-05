@@ -1,5 +1,7 @@
 #include "ScalarConverter.hpp"
 
+
+
 ScalarConverter::ScalarConverter() {}
 
 ScalarConverter::~ScalarConverter() {}
@@ -14,11 +16,6 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &other)
     if (this != &other)
         return *this;
     return *this;
-}
-
-const char *ScalarConverter::InvalidException::what() const throw()
-{
-	return "Invalid input";
 }
 
 bool checkIfScience(std::string input)
@@ -72,25 +69,29 @@ void convertChar(std::string input)
 	printInfo(c, i, f, d);
 }
 
-void convertDigit(std::string input)
+bool convertDigit(std::string input)
 {
 	double num;
 
-	num = std::stof(input);
+	try { num = std::stoi(input); }
+	catch (const std::out_of_range& e) {
+        std::cerr << "Error: Number is out of range: " << e.what() << std::endl;
+        return false; }
 	char c = static_cast<char>(num);
 	int i = static_cast<int>(num);
 	float f = static_cast<float>(num);
 	double d = static_cast<double>(num);
 	printInfo(c, i, f, d);
+	return true;
 }
 
 
-void ScalarConverter::checkType(std::string input)
+bool checkType(std::string input)
 {
 	if (input.length() == 1 && !isdigit(input[0]))
 	{
 		convertChar(input);
-		return ;
+		return true;
 	}
 	else if (isdigit(input[0]) || input[0] == '-' || input[0] == '+')
 	{
@@ -104,27 +105,28 @@ void ScalarConverter::checkType(std::string input)
 				if (input[i] == '.')
 				{
 					if (dot == true)
-						throw InvalidException();
+						return false;
 					dot = true;
 					continue;
 				}
 				if (i == input.length() - 1 && input[i] == 'f')
 					break;
-				throw InvalidException();
+				throw false;
 			}
 		}
-		convertDigit(input);
-		return ;
+		if (convertDigit(input) == true)
+			return true;
 	}
-	throw InvalidException();
+	return false;
 }
 
 
 void ScalarConverter::convert(std::string input)
 {
 	if (input.empty())
-		throw InvalidException();
+		std::cerr << "Invalid Input" << std::endl;
 	if (checkIfScience(input))
 		return ;
-	checkType(input);
+	if (checkType(input) == false)
+		std::cerr << "Invalid Input" << std::endl;
 }

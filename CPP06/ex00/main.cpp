@@ -7,14 +7,6 @@ int main (int argc, char **argv)
 		std::cout << "usage: ./converter <input>" << std::endl;
 		return 1;
 	}
-	ScalarConverter input;
-	try
-	{
-		input.convert(argv[1]);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
+		ScalarConverter::convert(argv[1]);
 	return 0;
 }
