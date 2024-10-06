@@ -10,5 +10,8 @@ int main(void)
 	};
 	iter(str, 3, print);
 
+	int arr[3] = {1, 2, 3};
+	iter(arr, 3, print);
+
 	return (0);
 }
