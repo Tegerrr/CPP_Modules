@@ -1,4 +1,4 @@
-NAME     = array
+NAME     = iter
 
 SRCS     = $(wildcard *.cpp)
 HDRS     = $(wildcard *.hpp)

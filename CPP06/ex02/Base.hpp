@@ -5,6 +5,7 @@
 # include <cstdlib>
 # include <string>
 # include <ctime>
+# include <exception>
 
 class Base {
 	public:

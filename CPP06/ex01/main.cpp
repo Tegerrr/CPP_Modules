@@ -2,7 +2,6 @@
 
 int main ()
 {
-    // Serializer s;
     Serializer::Data data;
 
     data.i = 42;
