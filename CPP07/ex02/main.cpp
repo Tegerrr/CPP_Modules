@@ -4,7 +4,7 @@ int main()
 {
 	Array<int> arr(5);
 	Array<int> arr2(5);
-	Array<char> arr3(5);
+	Array<char> arr3(3);
 
 	for (int i = 0; i < 5; i++)
 	{
