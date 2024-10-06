@@ -50,11 +50,16 @@ bool checkIfScience(std::string input)
 
 void printInfo(char c, int i, float f, double d)
 {
-	if (c < 32 || c > 126)
+	if (f < 0 || f > 127)
+		std::cout << "char: Out of bounds" << std::endl;
+	else if (c < 32 || c > 126)
 		std::cout << "char: Non displayable" << std::endl;
 	else
 		std::cout << "char: '" << c << "'" << std::endl;
-	std::cout << "int: " << i << std::endl;
+	if (f > std::numeric_limits<int>::max() || f < std::numeric_limits<int>::min())
+		std::cout << "int: Out of bounds" << std::endl;
+	else
+		std::cout << "int: " << i << std::endl;
 	std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
 	std::cout << "double: " << d << std::fixed << std::setprecision(1) << std::endl;
 }
@@ -73,7 +78,7 @@ bool convertDigit(std::string input)
 {
 	double num;
 
-	try { num = std::stoi(input); }
+	try { num = std::stof(input); }
 	catch (const std::out_of_range& e) {
         std::cerr << "Error: Number is out of range: " << e.what() << std::endl;
         return false; }
@@ -104,14 +109,14 @@ bool checkType(std::string input)
 			{
 				if (input[i] == '.')
 				{
-					if (dot == true)
+					if (dot == true || strchr(input.c_str(), 'f') || input[i + 1] == '\0' )
 						return false;
 					dot = true;
 					continue;
 				}
 				if (i == input.length() - 1 && input[i] == 'f')
 					break;
-				throw false;
+				return false;
 			}
 		}
 		if (convertDigit(input) == true)
