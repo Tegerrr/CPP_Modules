@@ -70,6 +70,8 @@
 		"variant": "cpp",
 		"__functional_03": "cpp",
 		"filesystem": "cpp",
-		"charconv": "cpp"
+		"charconv": "cpp",
+		"__tree": "cpp",
+		"map": "cpp"
 	}
 }
