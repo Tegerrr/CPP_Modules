@@ -72,6 +72,7 @@
 		"filesystem": "cpp",
 		"charconv": "cpp",
 		"__tree": "cpp",
-		"map": "cpp"
+		"map": "cpp",
+		"list": "cpp"
 	}
 }

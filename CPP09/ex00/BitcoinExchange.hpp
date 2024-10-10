@@ -29,6 +29,7 @@ private:
     bool validateValue(const std::string& value) const;
     void printError(const std::string& msg, const std::string& line) const;
     float getRateForDate(const std::string& date) const;
+    bool validateValueGenerate(const std::string& value) const;
 };
 
 #endif

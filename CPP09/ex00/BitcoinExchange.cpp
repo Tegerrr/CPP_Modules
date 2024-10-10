@@ -25,7 +25,6 @@ bool BitcoinExchange::validateDate(const std::string& date) const {
     int year = std::atoi(date.substr(0, 4).c_str());
     int month = std::atoi(date.substr(5, 2).c_str());
     int day = std::atoi(date.substr(8, 2).c_str());
-
     if (year < 1000 || year > 9999 || month < 1 || month > 12)
         return false;
 
@@ -54,13 +53,32 @@ bool BitcoinExchange::validateValue(const std::string& value) const {
     return floatValue > 0 && floatValue <= 1000;
 }
 
+bool BitcoinExchange::validateValueGenerate(const std::string& value) const {
+    if (value.empty() || value[0] == '-')
+    {
+        return false; 
+    }
+    bool decimalFound = false;
+    for (std::string::const_iterator it = value.begin(); it != value.end(); ++it) {
+        if (*it == '.') {
+            if (decimalFound) return false;
+            decimalFound = true;
+        } else if (!std::isdigit(*it)) {
+            return false;
+        }
+    }
+    float floatValue = std::atof(value.c_str());
+    if (floatValue == 0)
+        return true;
+    return floatValue;
+}
+
 void BitcoinExchange::printError(const std::string& msg, const std::string& line) const {
     std::cout << "Error: " << msg << " => " << line << std::endl;
 }
 
 float BitcoinExchange::getRateForDate(const std::string& date) const {
     std::map<std::string, float>::const_iterator it = database.lower_bound(date);
-    
     if (it == database.end() || (it != database.begin() && date != it->first))
         --it;
 
@@ -81,15 +99,16 @@ void BitcoinExchange::loadDatabase(const std::string& filename) {
     while (std::getline(file, line)) {
         if (line == "date,exchange_rate")
             continue;
-
         std::size_t delimPos = line.find(',');
         if (delimPos == std::string::npos)
             continue;
+            // std::cout << "line: " << line << std::endl;
 
         std::string date = line.substr(0, delimPos);
+        // std::cout << "date: " << date << std::endl;
         std::string value = line.substr(delimPos + 1);
 
-        if (!validateDate(date) || !validateValue(value))
+        if (!validateDate(date) || !validateValueGenerate(value))
             continue;
 
         database[date] = std::atof(value.c_str());
@@ -135,11 +154,8 @@ void BitcoinExchange::processTransactions(const std::string& filename) {
         float floatValue = std::atof(value.c_str());
         float exchangeRate = getRateForDate(date);
         
-        if (exchangeRate > 0) {
-            std::cout 
-                      << date << " => " << value << " = " 
+            std::cout << date << " => " << value << " = " 
                       << exchangeRate * floatValue << std::endl;
-        }
     }
 
     file.close();
