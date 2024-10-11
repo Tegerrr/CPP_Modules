@@ -130,6 +130,13 @@ void BitcoinExchange::processTransactions(const std::string& filename) {
         // if (line == "date | value")
         //     continue;
 
+		bool	is_valid = line.length() > 13 && line.at(4) == '-' && line.at(7) == '-' && line.at(10) == ' ';
+
+		if (!is_valid)
+		{
+			printError("bad input", line);
+			continue ;
+		}
         std::size_t delimPos = line.find('|');
         if (delimPos == std::string::npos) {
             printError("bad input", line);
