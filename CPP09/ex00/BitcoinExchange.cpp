@@ -117,7 +117,8 @@ void BitcoinExchange::loadDatabase(const std::string& filename) {
     file.close();
 }
 
-void BitcoinExchange::processTransactions(const std::string& filename) {
+void BitcoinExchange::processTransactions(const std::string& filename)
+{
     std::ifstream file(filename.c_str());
     if (!file.is_open())
         throw FileReadException();
